@@ -23,7 +23,8 @@
 				"ianic.zig-language-extras",
 				"lorenzopirro.zig-snippets",
 				"vadimcn.vscode-lldb",
-				"zixuanwang.linkerscript"
+				"zixuanwang.linkerscript",
+				"zhwu95.riscv"
 			]
 		}
 	},

@@ -6,6 +6,11 @@ SECTIONS {
         *(.text .text.*);
     }
 
+    .tvec : ALIGN(4) {
+        _tvec_base = .;
+        KEEP(*(.tvec));
+    }
+
     .rodata : ALIGN(4) {
         *(.rodata .rodata.*);
     }

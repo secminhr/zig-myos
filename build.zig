@@ -19,11 +19,11 @@ pub fn build(b: *std.Build) !void {
     kernel.setLinkerScript(b.path("kernel.ld"));
     b.installArtifact(kernel);
 
-    var kernel_out_path: [100]u8 = [_]u8{0} ** 100;
-    _ = try std.fmt.bufPrint(&kernel_out_path, "{s}/bin/kernel", .{ b.install_path });
-    
-    const run_script = if (debug) "./debug.sh" else "./run.sh";
-    const run_qemu = b.addSystemCommand(&[_][]const u8 { run_script, &kernel_out_path });
+    var kernel_out_path_buf: [100]u8 = undefined;
+    const kernel_out_path = try std.fmt.bufPrint(&kernel_out_path_buf, "{s}/bin/kernel", .{ b.install_path });
+
+    const run_script = if (debug) "./script/debug.sh" else "./script/run.sh";
+    const run_qemu = b.addSystemCommand(&[_][]const u8 { run_script, kernel_out_path });
     run_qemu.step.dependOn(b.getInstallStep());
 
     const run_step = b.step("run", "Run kernel with qemu-system-riscv32");
